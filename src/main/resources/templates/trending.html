@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+
+		<div class="container-fluid custom-mt"
+			style="background-color: #f5f5f5;">
+			<div class="row custom-mt">
+
+				<!-- ================= LEFT FILTER PANEL ================= -->
+
+				<div class="col-lg-3 col-md-4 mb-4 mt-3">
+					<div class="card shadow-sm filters-box">
+						<div class="card-header fw-bold">Filters</div>
+						<div class="card-body">
+
+							<!-- Product Type -->
+							<form action="/destination" method="get">
+
+								<h6 class="fw-bold">Category</h6>
+
+
+								<div class="form-check" th:each="c : ${categories}">
+
+									<input class="form-check-input" type="checkbox" name="category"
+										th:value="${c.name}"
+										th:checked="${selectedCategory != null and selectedCategory.contains(c.name)}">
+									<label class="form-check-label" th:text="${c.name}"> </label>
+								</div>
+
+								<!-- Start City -->
+
+								<h6 class="fw-bold mt-3">Start City</h6>
+								<div th:each="s : ${states}">
+									<input type="checkbox" name="state" th:value="${s}"
+										th:checked="${selectedState != null and selectedState.contains(s)}">
+									<label th:text="${s}"></label>
+								</div>
+								<h6 class="fw-bold mt-3">Duration</h6>
+								<div th:each="d : ${durations}">
+									<input type="checkbox" name="duration" th:value="${d}"
+										th:checked="${selectedDuration != null and selectedDuration.contains(d)}">
+									<label th:text="${d + ' Days'}"></label>
+								</div>
+
+								<button type="submit" class="btn btn-primary mt-2">
+									Apply Filter</button>
+
+							</form>
+
+							<!-- Duration -->
+
+
+						</div>
+					</div>
+				</div>
+
+				<!-- ================= TOUR LIST ================= -->
+
+				<div class="col-lg-9 col-md-8 mt-4">
+
+					<!-- Top Bar -->
+					<div
+						class="d-flex justify-content-between align-items-center mb-4 p-2 bg-white shadow rounded-4">
+
+						<!-- Left Title -->
+						<a href="/destination" class="back-btn"> <i
+							class="fa-solid fa-arrow-left me-2 "></i> Back
+						</a>
+						<h4 class="fw-bold m-0 fs-4">
+							<span class="text-primary" style="margin-left: 20px;">10</span>
+							Results - Best Tours
+						</h4>
+
+						<!-- Search Box -->
+						<form action="/search" method="get" class="w-50">
+							<div class="input-group search-box">
+
+								<span class="input-group-text bg-white border-0"> <i
+									class="fa-solid fa-magnifying-glass text-muted"></i>
+								</span> <input type="text" class="form-control border-0 shadow-none"
+									name="ch" placeholder="Search by place, city, state...">
+
+								<button class="btn btn-primary px-4 rounded-end">
+									Search</button>
+
+							</div>
+						</form>
+
+					</div>
+					<!-- ===== Tour Card ===== -->
+
+
+					<!-- ✅ IF DATA EXISTS -->
+					<th:block
+						th:if="${destinations != null and !destinations.isEmpty()}">
+						<div class="card mb-4 shadow-sm" style="border-radius: 10px;"
+							th:each="d : ${destinations}">
+							<div class="row g-0">
+
+								<!-- Image -->
+								<div class="col-md-4 position-relative" style="height: 290px;">
+									<img th:src="@{'/images/destination/' + ${d.image}}"
+										class="img-fluid h-100 w-100"
+										style="object-fit: cover; border-radius: 10px;"> <span
+										class="badge bg-danger position-absolute top-0 start-0 m-2">
+										Best Seller </span>
+
+									<div
+										class="position-absolute bottom-0 w-100 text-center text-white bg-dark bg-opacity-50 py-1">
+										Product Code: [[${d.id}]]</div>
+								</div>
+
+								<!-- Details -->
+								<div class="col-md-8 ps-3">
+									<div class="card-body">
+										<div class="d-flex justify-content-between align-items-center">
+											<h4 class="fw-bold mb-2">[[${d.title}]]</h4>
+											<span class="badge bg-primary  px-3 py-2">[[${d.category}]]</span>
+										</div>
+										<p class="mb-1">
+											⭐⭐⭐⭐ <strong>4.2</strong> (20 reviews)
+										</p>
+
+										<p class="text-muted m-1" style="font-size: 18px">
+											[[${d.description}]]</p>
+
+										<p class="m-0">
+											<strong>From :</strong> [[${d.city}]], [[${d.state}]]
+										</p>
+
+										<p class="m-0">
+											<strong>Duration :</strong> [[${d.duration}]] hour
+										</p>
+
+										<div
+											class="d-flex justify-content-between align-items-center mt-3">
+											<h4 class="text-warning fw-bold">Budget : ₹
+												[[${d.price}]]0+</h4>
+
+											<div>
+												<a th:href="${d.location}" target="_blank"
+													class="btn btn-danger px-3 me-2"> <i
+													class="fa-solid fa-location-dot"></i> Map
+												</a> <a th:href="@{'/view_detail/' + ${d.id}}"
+													class="btn btn-danger px-3"> See Detail </a>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</th:block>
+
+					<!-- ❌ IF EMPTY -->
+					<th:block
+						th:unless="${destinations != null and !destinations.isEmpty()}">
+						<p class="fs-1 text-danger text-center mt-5">Destination not
+							available</p>
+					</th:block>
+
+					<div class="row">
+						<div class="col-md-4 fs-5">Total Product :
+							[[${totalElements}]]</div>
+						<div class="col-md-6">
+
+							<nav aria-label="Page navigation example">
+
+								<ul class="pagination" th:if="${totalPages > 0}">
+
+    <!-- PREVIOUS -->
+    <li class="page-item" th:classappend="${isFirst} ? 'disabled'">
+        <a class="page-link"
+           th:href="@{/destination(pageNo=${pageNo - 1})}">
+           &laquo;
+        </a>
+    </li>
+
+    <!-- PAGE NUMBERS -->
+    <li th:each="i : ${#numbers.sequence(1,totalPages)}"
+        class="page-item"
+        th:classappend="${pageNo+1==i} ? 'active'">
+
+        <a class="page-link"
+           th:href="@{/destination(pageNo=${i - 1})}">
+           [[${i}]]
+        </a>
+    </li>
+
+    <!-- NEXT -->
+    <li class="page-item" th:classappend="${isLast} ? 'disabled'">
+        <a class="page-link"
+           th:href="@{/destination(pageNo=${pageNo + 1})}">
+           &raquo;
+        </a>
+    </li>
+
+</ul>
+							</nav>
+
+						</div>
+
+					</div>
+					<!-- Duplicate tour card for more results -->
+				</div>
+			</div>
+		</div>
+
+	</section>
+</body>
+</html>

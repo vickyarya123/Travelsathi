@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section>
+		<style>
+.hero-content h1 {
+	font-size: 150px;
+	color: white;
+}
+
+.introh4{
+    
+	font-size: 24px;
+	font-weight: bold; 
+	margin-bottom: 30px;
+	color: #333;
+	line-height: 2;
+}
+
+.intro {
+	font-size: 20px;
+	margin-bottom: 20px;
+	color: #333;
+	font-family: 'Inter', sans-serif;
+}
+</style>
+		<div class="hero-wrapper">
+			<!-- CAROUSEL -->
+			<div id="carouselExample" class="carousel slide carousel-fade"
+				data-bs-ride="carousel">
+
+				<div class="carousel-inner">
+
+					<!-- Image -->
+					<div class="carousel-item active">
+						<img src="/images/about.jpg" class="d-block w-100 hero-img">
+					</div>
+
+				</div>
+
+			</div>
+			<!-- HERO CONTENT -->
+			<div class="hero">
+				<div class="hero-content">
+					<h1
+						class="font-serif text-6xl md:text-7xl lg:text-8xl font-normal text-white tracking-tight"
+						data-testid="about-title">About us</h1>
+
+					<div class="absolute bottom-4 md:bottom-8 left-1/2 z-20 "
+						style="margin-top: 250px;">
+						<button
+							class="scroll-indicator bg-transparent border-0 text-white opacity-80 hover:opacity-100">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+								viewBox="0 0 24 24" fill="none" stroke="currentColor"
+								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+								class="w-6 h-6">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class=" relative z-10"
+			style="margin: 30px 310px; padding: 5px 160px;">
+			<h4
+				class="introh4 text-center">
+				Dear Valued Guest,</h4>
+
+			<div class="space-y-8 text-center max-w-2xl mx-auto">
+
+				<p
+					 class="intro"	data-testid="about-paragraph-1">"Welcome to TripSpotter, your
+					trusted guide to discovering stays that inspire.We handpick every
+					destination with the same care we'd choose for ourselves, so your
+					travel search feels effortless and your journeys unforgettable.</p>
+				<p
+					class="intro"data-testid="about-paragraph-2">Our passion for exploration and
+					attention to detail are at the heart of everything we do.If we can
+					help you find a place that feels just right, we're always here to
+					guide you.</p>
+				<p
+					class="intro"data-testid="about-paragraph-3">Thank you for traveling with
+					TripSpotter, we can't wait to help you uncover your next remarkable
+					stay."</p>
+			</div>
+			
+			<div class="flex justify-center mb-6">
+				<div class="text-center">
+					<div class="mb-3" data-testid="about-signature">
+						<img alt="Hugo Koopman Signature" class="mx-auto h-20 w-auto"
+							src="/images/vickysignature.png">
+					</div>
+					<h3 class="text-2xl md:text-3xl font-normal  text-[#2C2C2C]"
+						data-testid="about-ceo-name" style="font-family: &amp; amp;">Vicky
+						Aarya</h3>
+					<p class="introh4" style="color:#B8860B;"
+						data-testid="about-ceo-title">CEO &amp; Founder</p>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+</body>
+</html>

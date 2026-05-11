@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="hero-wrapper">
+			<!-- CAROUSEL -->
+			<div id="carouselExample" class="carousel slide carousel-fade"
+				data-bs-ride="carousel" data-bs-interval="3000">
+
+				<div class="carousel-inner">
+
+					<!-- Dynamic Images -->
+					<div class="carousel-item" th:each="d, stat : ${destinations}"
+						th:classappend="${stat.index == 0} ? 'active'">
+
+						<img th:src="@{'/images/destination/' + ${d.image}}"
+							class="d-block w-100 hero-img">
+
+						<!-- Optional Text -->
+						<div class="carousel-caption  d-none d-md-block"
+							style="margin-bottom: 280px; color: white;">
+							<h2>
+								[[${d.title}]] , <span style="font-size: 20px;">
+									[[${d.city}]], [[${d.state}]] </span>
+							</h2>
+						</div>
+
+					</div>
+
+				</div>
+
+				<!-- Controls -->
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#carouselExample" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon"></span>
+				</button>
+
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#carouselExample" data-bs-slide="next">
+					<span class="carousel-control-next-icon"></span>
+				</button>
+
+			</div>
+			<!-- HERO CONTENT -->
+			<div class="hero">
+				<div class="hero-content">
+					<h1 style="margin-bottom: 100px;">Holiday Packages In India</h1>
+
+					<form action="/search" method="get">
+
+						<div class="search-box">
+							<span class="icon"><i class="fa-solid fa-location-dot"></i></span>
+							<input type="text" name="ch"
+								placeholder="Where do you want to go?" required>
+							<button>SEARCH</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- BOOKING SECTION -->
+
+		<th:block th:if="${user==null}">
+			<div class="container overlap-box">
+
+				<div class="row align-items-center text-white rounded p-2"
+					style="background: linear-gradient(90deg, #a11c3a, #4b2b6a);">
+
+
+					<h3 class="fw-bold text-white p-2"
+						style="background: linear-gradient(90deg, #a11c3a, #4b2b6a); padding-left: 200px">
+						Get the Best Holiday Planned by Experts! <span
+							style="padding-left: 350px"><i class="fa-solid fa-phone "></i>
+							7004265137</span>
+					</h3>
+
+
+					<!-- FORM -->
+					<div class="container my-1">
+
+						<div class="quote-section p-4 rounded-4">
+
+							<form id="quoteForm" class="row g-3 align-items-center">
+
+								<!-- NAME -->
+								<div class="col-lg col-md-6">
+									<input type="text" id="name" class="form-control custom-input"
+										placeholder="Your Name" required
+										oninvalid="this.setCustomValidity('Enter your name')"
+										oninput="this.setCustomValidity('')">
+								</div>
+
+								<!-- EMAIL -->
+								<div class="col-lg col-md-6">
+									<input type="email" id="email"
+										class="form-control custom-input" placeholder="Email ID"
+										required
+										oninvalid="this.setCustomValidity('Enter your email')"
+										oninput="this.setCustomValidity('')">
+								</div>
+
+								<!-- MOBILE -->
+								<div class="col-lg col-md-6">
+
+									<div class="input-group">
+
+										<span class="input-group-text custom-prefix"> +91 </span> <input
+											type="tel" id="mobile" class="form-control custom-input"
+											placeholder="Mobile Number" required
+											oninvalid="this.setCustomValidity('Enter mobile number')"
+											oninput="this.setCustomValidity('')">
+
+									</div>
+
+								</div>
+
+								<!-- MONTH -->
+								<div class="col-lg col-md-6">
+									<select class="form-select custom-input" id="monthSelect">
+
+									</select>
+								</div>
+
+								<!-- BUTTON -->
+								<div class="col-lg col-md-12">
+
+									<button type="button" class="btn quote-btn w-100"
+										onclick="fillModalData()">Get Free Quote</button>
+
+								</div>
+
+							</form>
+
+						</div>
+
+					</div>
+
+					<!-- BUTTON + CALL -->
+
+
+				</div>
+			</div>
+		</th:block>
+
+
+
+		<!-- OTP MODAL (HOME PAGE ME HI DAALO) -->
+		<div class="modal fade" id="otpModal" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content p-4 rounded-4">
+
+					<!-- Close -->
+					<div class="text-end">
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+
+					<!-- User Info -->
+					<div
+						class="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
+						<img src="/images/otp.jpg" width="65" class="me-3">
+						<div>
+							<h5 class="mb-0 fw-bold" id="modalName">Name</h5>
+							<small class="text-muted" id="modalContact">email /
+								mobile</small>
+						</div>
+					</div>
+
+					<!-- Heading -->
+					<h5 class="fw-bold mb-1">Please verify your mobile number</h5>
+					<p class="text-muted mb-3">OTP sent to your mobile number</p>
+
+					<!-- OTP Input -->
+					<input type="text"
+						class="form-control form-control-lg text-center mb-3"
+						placeholder="Enter OTP" maxlength="6">
+					<!-- Button -->
+					<div class="text-center">
+						<button class="btn btn-danger px-5 py-2 fw-bold">SUBMIT</button>
+					</div>
+
+					<!-- Resend -->
+					<p class="text-center mt-3 mb-0">
+						<a href="#" class="text-decoration-none text-primary">Resend
+							OTP</a>
+					</p>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- BOOKING SECTION END -->
+
+
+		<div class="ai-section">
+			<div class="ai-container">
+				<h1>
+					Search with <br> <span>Seamless Power ✨</span>
+				</h1>
+				<div class="asearch-box">
+					<span class="icon">🔍</span> <input type="text" id="msg"
+						placeholder="Ask about travel...">
+					<button onclick="sendMsg()">➤</button>
+				</div>
+			</div>
+		</div>
+		<hr>
+
+
+		<!-- country sugestion start-->
+
+		<div id="discover-world" class="py-5 bg-light">
+			<div class="container-fluid">
+
+				<!-- HEADING -->
+				<div class="text-center mb-5 px-3">
+					<h2 class="fw-normal display-6 mb-3">Make your move and
+						discover the world that's waiting for you.</h2>
+					<p class="text-muted fs-6 mx-auto" style="max-width: 700px;">
+						Discover stunning spots, choose a country to explore and see our
+						handpicked accommodations.</p>
+				</div>
+
+				<!-- GRID -->
+				<div class="row g-4"
+					style="margin-right: 100px; margin-left: 100px;">
+					<!-- CARD -->
+					<div class="col-6 col-md-4" th:each="entry : ${stateList}">
+						<a th:href="@{'/destination'(state=${entry.key})}"
+							class="text-decoration-none">
+							<div class="discover-card">
+
+								<!-- Correct image for that state -->
+								<img th:src="@{'/images/destination/' + ${entry.value.image}}"
+									alt="state">
+
+								<div class="overlay">
+									<h5>[[${entry.key}]]</h5>
+								</div>
+
+							</div>
+						</a>
+					</div>
+
+
+					<div class="col-6 col-md-4">
+						<a href="/destination">
+							<div class="discover-card">
+								<img th:src="@{'/images/france.webp'}" alt="india">
+								<div class="overlay">
+									<h5>All</h5>
+								</div>
+							</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<hr>
+		<!-- country sugestion end-->
+
+
+
+		<div class="spotlight-section py-5">
+			<div class="container">
+				<!-- Heading -->
+				<div class="text-center mb-5">
+					<h2 class="fw-bold display-5">Spotlighted Stays</h2>
+					<p class="text-muted">Discover our most exclusive and
+						sought-after accommodations</p>
+				</div>
+				<div class="row g-4">
+					<!-- LEFT BIG CARD -->
+					<div class="col-lg-7">
+						<div class="hotel-card big-card">
+							<img src="/images/spotlight1.jpg"
+								class="w-100 h-100 object-fit-cover">
+							<div class="overlay"></div>
+							<div class="hotel-content">
+								<small><i class="fa-solid fa-location-dot"></i>
+									Mumbai, maharastra</small>
+
+								<h2>Andronis Boutique Hotel</h2>
+
+								<a href="/view_detail/77"> Explore stay <i class="fa-solid fa-arrow-right"></i>
+								</a>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- RIGHT TWO CARDS -->
+					<div class="col-lg-5">
+						<div class="row g-4">
+							<div class="col-12">
+								<div class="hotel-card small-card">
+									<img src="/images/spotlight2.jpg"
+										class="w-100 h-100 object-fit-cover">
+									<div class="overlay"></div>
+									<div class="hotel-content">
+										<small> <i class="fa-solid fa-location-dot"></i>
+											Delhi, India
+										</small>
+										<h3>Villa Cora</h3>
+
+										<a href="/view_detail/64"> View details <i
+											class="fa-solid fa-arrow-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="hotel-card small-card">
+
+									<img src="/images/spotlight3.jpg"
+										class="w-100 h-100 object-fit-cover">
+
+									<div class="overlay"></div>
+
+									<div class="hotel-content">
+										<small> <i class="fa-solid fa-location-dot"></i>
+											Dehradun, Uttrakhand
+										</small>
+
+										<h3>Villa Saint-Ange</h3>
+
+										<a href="/view_detail/92"> View details <i
+											class="fa-solid fa-arrow-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- BOTTOM FULL CARD -->
+					<div class="col-12">
+
+						<div class="hotel-card bottom-card">
+
+							<img src="/images/spotlight4.jpg"
+								class="w-100 h-100 object-fit-cover">
+
+							<div class="overlay"></div>
+
+							<div class="hotel-content">
+
+								<small> <i class="fa-solid fa-location-dot"></i> Douro
+									Manali, Himachal predesh
+								</small>
+
+								<h2>Octant Douro</h2>
+
+								<a href="/view_detail/114"> Discover more <i
+									class="fa-solid fa-arrow-right"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</body>
+</html>
