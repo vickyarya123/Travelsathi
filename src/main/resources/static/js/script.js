@@ -256,7 +256,7 @@ function searchAgoda(city , state){
 
 
 
-// *************** REGISTER VALIDATION ************************
+// *************** SHOW PASSWORD ************************
 function togglePassword(inputId, iconId){
 
     let input = document.getElementById(inputId);
@@ -280,6 +280,11 @@ function togglePassword(inputId, iconId){
         icon.classList.add("fa-eye");
     }
 }
+
+
+
+
+// *************** REGISTER VALIDATION ************************
 $(function(){
 
 // User Register validation

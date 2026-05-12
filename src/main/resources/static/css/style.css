@@ -1,6 +1,8 @@
 body{
 	background-color:#F8F9FA;
 }
+
+
 .navbar-custom{
     background: rgba(255,255,255,0.92);
     backdrop-filter: blur(12px);
