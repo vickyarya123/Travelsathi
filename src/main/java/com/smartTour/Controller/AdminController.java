@@ -371,7 +371,7 @@ public class AdminController {
 		}
 		m.addAttribute("userType", type);
 		m.addAttribute("users", users);
-		return "/admin/users";
+		return "admin/users";
 	}
 
 	@GetMapping("/updateSts")
@@ -440,7 +440,7 @@ public class AdminController {
 	public String loadAdminAdd(Model m) {
 		m.addAttribute("title",
 		        "AddAdmin- TravelSathi");
-		return "/admin/add_admin";
+		return "admin/add_admin";
 	}
 
 	@PostMapping("/save-admin")

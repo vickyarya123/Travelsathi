@@ -80,16 +80,39 @@
 
 									<div class="row mb-3">
 										<div class="col">
-											<label class="form-label">Password</label> <input required
-												class="form-control" name="password" type="password">
+											<label class="form-label">Password</label>
+
+											<div class="input-group">
+
+												<input required id="pass" class="form-control"
+													name="password" type="password"> <span
+													class="input-group-text"
+													onclick="togglePassword('pass','toggleIcon1')"
+													style="cursor: pointer;"> <i class="fa-regular fa-eye"
+													id="toggleIcon1"></i>
+												</span>
+
+											</div>
 										</div>
 
 										<div class="col">
-											<label class="form-label">Confirm Password</label> <input
-												required class="form-control" name="cpassword"
-												type="password">
+											<label class="form-label">Confirm Password</label>
+
+											<div class="input-group">
+
+												<input required id="cpass" class="form-control"
+													name="cpassword" type="password"> <span
+													class="input-group-text"
+													onclick="togglePassword('cpass','toggleIcon2')"
+													style="cursor: pointer;"> <i class="fa-regular fa-eye"
+													id="toggleIcon2"></i>
+												</span>
+
+											</div>
 										</div>
+										
 									</div>
+
 
 									<div class="mb-3">
 										<label class="form-label">Profile Image</label> <input

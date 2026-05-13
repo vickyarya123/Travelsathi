@@ -18,7 +18,7 @@
 					<div class="carousel-item" th:each="d, stat : ${destinations}"
 						th:classappend="${stat.index == 0} ? 'active'">
 
-						<img th:src="@{'/images/destination/' + ${d.image}}"
+						<img th:src="@{/images/destination/{img}(img=${d.image})}"
 							class="d-block w-100 hero-img">
 
 						<!-- Optional Text -->
