@@ -106,7 +106,7 @@ public class UserController {
 	public String profile(Model m) {
 		  m.addAttribute("title",
 			        "My Profile | TravelSathi");
-		return "/user/profile";
+		return "user/profile";
 	}
 
 	@PostMapping("/update-profile")
@@ -124,7 +124,7 @@ public class UserController {
 	public String showChangePasswordPage(Model m) {
 		m.addAttribute("title",
 		        "change password- TravelSathi");
-		return "/user/changepassword";
+		return "user/changepassword";
 	}
 
 	@PostMapping("/change-password")
