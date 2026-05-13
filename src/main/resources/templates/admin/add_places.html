@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section>
+
+
+		<div class="container  mb-4" style="margin-top: 100px;">
+			<div class="card shadow-lg p-4 border-4">
+				<div class="card-header text-center  border-3 mb-3">
+					<p class="fs-4 fw-bold">Add New places</p>
+
+
+					<th:block th:if="${session.succMsg}">
+						<p class="text-success fw-bold" style="font-size:27px">[[${session.succMsg}]]</p>
+						<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+					</th:block>
+
+					<th:block th:if="${session.errorMsg}">
+						<p class="text-danger fw-bold" style="font-size:27px">[[${session.errorMsg}]]</p>
+						<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+					</th:block>
+
+				</div>
+				<div class="card-body">
+					<form action="/admin/saveDestination" method="post"
+						enctype="multipart/form-data">
+
+						<!-- BASIC INFO -->
+						<h5 class="mb-3 text-primary">Basic Information</h5>
+
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label>Place Name</label> <input type="text" name="title"
+									class="form-control" required>
+							</div>
+
+							<div class="col-md-6 mb-3">
+								<label>Category</label> <select name="category"
+									class="form-control" required>
+
+									<option value="">--Select Category--</option>
+									<option th:each="c:${categories}">[[${c.name}]]</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<label>Short Description</label>
+							<textarea name="description" class="form-control" rows="2"
+								required></textarea>
+						</div>
+
+						<!-- LOCATION -->
+						<h5 class="mt-4 mb-3 text-success">Location Details</h5>
+
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label>State</label> <input type="text" name="state"
+									class="form-control" required>
+							</div>
+
+							<div class="col-md-6 mb-3">
+								<label>City</label> <input type="text" name="city"
+									class="form-control" required>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<label>Google Map Link</label> <input type="text" name="location"
+								class="form-control" placeholder="Paste Google Maps URL">
+						</div>
+
+						<!-- PRICE -->
+						<h5 class="mt-4 mb-3 text-warning">Pricing & Duration</h5>
+
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label>Price ($)</label> <input type="number" name="price"
+									class="form-control" required>
+							</div>
+
+							<div class="col-md-6 mb-3">
+								<label>Duration (Days)</label> <input type="number"
+									name="duration" class="form-control" required>
+							</div>
+						</div>
+						
+						<div class="mb-3">
+									<label>Status</label>
+
+									<div class="form-check">
+										<input class="form-check-input" type="radio" checked
+											value="true" name="isActive"> <label
+											class="form-check-label">Active</label>
+									</div>
+
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="isActive"
+											value="false"> <label class="form-check-label">Inactive</label>
+									</div>
+								</div>
+
+						<!-- IMAGE -->
+						<h5 class="mt-4 mb-3 text-danger">Upload Image</h5>
+
+						<div class="mb-3">
+							<label>Main Image</label> <input type="file" name="file"
+								class="form-control" required>
+						</div>
+
+						<!-- SUBMIT -->
+						<div class="  text-center mt-4 ">
+							<button class=" col-md-6 btn btn-primary px-4">Submit</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
