@@ -391,7 +391,7 @@ public class AdminController {
 		m.addAttribute("title",
 		        "Yourprofile India Tour Packages with TravelSathi");
 
-		return "/admin/profile";
+		return "admin/profile";
 	}
 
 	@PostMapping("/update-profile")
@@ -410,7 +410,7 @@ public class AdminController {
 		m.addAttribute("title",
 		        "change password- TravelSathi");
 
-		return "/admin/changepassword";
+		return "admin/changepassword";
 	}
 
 	@PostMapping("/change-password")
