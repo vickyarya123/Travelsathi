@@ -1,4 +1,4 @@
-
+app.get("/health",(req,res)=>{res.send("ok");});
 let adults = 2;
 let children = 0;
 let rooms = 1;
@@ -121,7 +121,6 @@ function sendMsg() {
 function fillModalData() {
 
     let form = document.getElementById("quoteForm");
-
     // FORM VALIDATION
     if (!form.checkValidity()) {
 
