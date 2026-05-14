@@ -4,9 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title th:text="${title}">TravelSathi</title>
-<link rel="icon"
-          type="image/.png"
-          href="/images/logo.png">
+<link rel="icon" type="image/.png" href="/images/logo.png">
 </head>
 
 
@@ -27,7 +25,11 @@
 
 	<nav class="navbar navbar-expand-lg navbar-custom fixed-top">
 		<div class="container">
-			<a class="navbar-brand logo-text" href="/"> Travel<span>Sathi</span>
+			<a class="navbar-brand logo-text d-flex align-items-center" href="/">
+
+				<img src="/images/logo.png" alt="TravelSathi Logo" width="60"
+				height="55" class="me-2 rounded-circle"> Travel<span>Sathi</span>
+
 			</a>
 			<button class="navbar-toggler border-0 shadow-none" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
@@ -41,9 +43,8 @@
 						aria-current="page" href="/">Home</a></li> -->
 
 					<th:block th:if="${user==null}">
-						<li class="nav-item"><a class="nav-link active-nav"
-							 href="/"><i class="fa-solid fa-house me-1"></i>
-								Home</a></li>
+						<li class="nav-item"><a class="nav-link active-nav" href="/"><i
+								class="fa-solid fa-house me-1"></i> Home</a></li>
 					</th:block>
 
 					<th:block th:unless="${user==null}">
@@ -56,8 +57,8 @@
 								class="fa-solid fa-house"></i> Home</a></li>
 					</th:block>
 
-					<li class="nav-item"><a class="nav-link "
-						aria-current="page" href="/destination">Destination</a></li>
+					<li class="nav-item"><a class="nav-link " aria-current="page"
+						href="/destination">Destination</a></li>
 
 
 
@@ -65,13 +66,13 @@
 						class="nav-link dropdown-toggle" href="#" role="button"
 						data-bs-toggle="dropdown" aria-expanded="false"> Category </a>
 						<ul class="dropdown-menu border-0 shadow-lg rounded-4 p-2">
-							<li th:each="c:${categorys}">
-							<a class="dropdown-item rounded-3"
+							<li th:each="c:${categorys}"><a
+								class="dropdown-item rounded-3"
 								th:href="@{'/destination?category='+${c.name}}">[[${c.name}]]</a></li>
 						</ul></li>
 
-					<li class="nav-item"><a class="nav-link "
-						href="/contact" role="button">ContactUs</a></li>
+					<li class="nav-item"><a class="nav-link " href="/contact"
+						role="button">ContactUs</a></li>
 					<!-- AI BUTTON -->
 					<li class="nav-item"><a class="nav-link ai-link"
 						href="/ask_ai"> <i
@@ -83,16 +84,12 @@
 
 					<th:block th:if="${user==null}">
 
-						<li class="nav-item me-2"><a
-							class="btn  auth-btn login-btn "
-							
+						<li class="nav-item me-2"><a class="btn  auth-btn login-btn "
 							aria-current="page" href="/signin"><i
 								class="fa-solid fa-right-to-bracket me-1"></i> Login</a></li>
 
-						<li class="nav-item me-2"><a
-							class="btn  auth-btn login-btn"
-							 href="/register"><i
-								class="fa-solid fa-right-to-bracket me-1"></i>Register</a></li>
+						<li class="nav-item me-2"><a class="btn  auth-btn login-btn"
+							href="/register"><i class="fa-solid fa-right-to-bracket me-1"></i>Register</a></li>
 
 
 					</th:block>
@@ -113,11 +110,12 @@
 						<li class="nav-item dropdown "><a
 							class="dropdown-toggle btn user-btn"
 							style="background: #ff8c42; margin-right: 30px;" href="#"
-							role="button" data-bs-toggle="dropdown" >
-								<i class="fa-solid fa-user me-1"></i>[[${user.name}]]
+							role="button" data-bs-toggle="dropdown"> <i
+								class="fa-solid fa-user me-1"></i>[[${user.name}]]
 						</a>
 
-							<ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-2">
+							<ul
+								class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-2">
 								<li th:if="${user.role=='ROLE_USER'}"><a
 									class="dropdown-item rounded-3" href="/user/profile">Profile</a></li>
 
@@ -141,10 +139,8 @@
 
 							</ul></li>
 
-						<li class="nav-item"><a
-							class="btn auth-btn register-btn"
-							 href="/logout"><i
-								class="fa-solid fa-right-to-bracket me-1"></i>Logout</a></li>
+						<li class="nav-item"><a class="btn auth-btn register-btn"
+							href="/logout"><i class="fa-solid fa-right-to-bracket me-1"></i>Logout</a></li>
 					</th:block>
 
 				</ul>
