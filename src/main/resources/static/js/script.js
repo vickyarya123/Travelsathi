@@ -1,4 +1,4 @@
-app.get("/health",(req,res)=>{res.send("ok");});
+
 let adults = 2;
 let children = 0;
 let rooms = 1;
